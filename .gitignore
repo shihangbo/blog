@@ -1,0 +1,14 @@
+# IDEA artifacts and output dirs
+.idea
+.roadhogrc
+
+# dependencies
+/node_modules
+
+# production
+/dist
+
+# misc
+yarn.lock
+*.log
+package-lock.json
