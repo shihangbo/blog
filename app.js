@@ -7,6 +7,9 @@
 var express = require('express');
 //【使用模版】-加载模版处理模块
 var swig = require('swig');
+
+var mongoose = require('mongoose');
+
 //【应用创建】-2.创建app应用 -> NodeJS Http.createServer();
 var app = express();
 //【静态文件托管】-2.设置静态文件托管，当用户访问以‘／public’开始，那么直接返回对应‘__dirname + '/public'’下的文件
@@ -47,7 +50,19 @@ app.use('/', require('./routers/main')); //前台展示
 
 
 //【应用创建】-3.监听http请求
-app.listen(8081);
+
+mongoose.connect('mongodb://localhost:27018/blog', function(err) {
+
+  if (err) {
+    console.log('数据库连接失败！' + err);
+  } else {
+    console.log('数据库链接成功，开始代码吧～');
+    app.listen(8081);
+  }
+
+
+})
+
 
 
 /**
@@ -121,8 +136,18 @@ app.listen(8081);
  *        页面展示：前台功能实现
  * 六、用户注册
  *  1. UserSchema 结构设计
+ *        a. 加载数据库模块
+ *        b. 连接数据库
+ *        c. 开启mongodb数据库，官网：www.mongodb.com
+ *              安装mongodb数据库
+ *              命令行启动数据库：mongod --dbpath=当前项目的db文件夹 --port=27018
+ *              /Users/shihangbo/Documents/download/mongodb-osx-x86_64-3.6.0/bin/mongod --dbpath=/Users/shihangbo/Documents/project/watsonBlog/db --port=27018
+ *        d. 图形界面管理软件
+ *        e. 定义 schema 表结构
+ *        f. 定义 model 类来操作增删改查
  *  2. 注册界面
  *  3. 注册逻辑：使用ajax方式实现注册，api接口编写
+ *  4. 注册实现
  * 
  * 
  * 
