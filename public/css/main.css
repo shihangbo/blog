@@ -1,0 +1,21 @@
+/**
+ * Created by watson on 2017/12/26
+*/
+
+body {
+  background: #ddd;
+}
+h1 {
+  color: yellow;
+}
+.box {
+  padding: 10px;
+  border: 1px dotted #666;
+  border-radius: 3px;
+}
+.mb10 {
+  margin-bottom: 10px;
+}
+.hide {
+  display: none;
+}
