@@ -32,21 +32,29 @@
     if (!registerPassword) return alert('请输入注册密码');
 
     var data = 'username=' + registerUsername + '&password=' + registerPassword
-    var obj = new XMLHttpRequest();
-    obj.open("POST", '/api/user/register', true);
-    obj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");  // 添加http头，发送信息至服务器时内容编码类型
-    obj.onreadystatechange = function() {
-        if (obj.readyState == 4 && (obj.status == 200 || obj.status == 304)) {  // 304未修改
-          console.log(obj);
-        } else {
-          console.log(obj);
-        }
-    };
-    obj.send(data);
-
-
+    var xhr = null;
+    if (window.XMLHttpRequest) {
+      xhr = new XMLHttpRequest();
+    } else {
+      xhr = new ActiveXObject('Microsoft.XMLHttp');
+    }
+    xhr.open('POST', '/api/user/register', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304)) {
+        console.log('请求成功:' + xhr.responseText);
+        doResponse.bind(this, xhr.responseText);
+      } else {
+        console.log('请求失败: ' + xhr.status);
+      }
+    }
+    xhr.send(data);
 
 
   }, false);
+
+  function doResponse(res) {
+    console.log('doResponse函数处理: ' + res);
+  }
 
 })()
