@@ -7,6 +7,10 @@
 </head>
 <body>
   <h1>hello welcome to watson'blog!</h1>
+  <div class="box hide" id="welcomeBox">
+    <h3 id="welcomeText" class="green">欢迎回来</h3>
+    <input type="button" id="quit" value="退出"/>
+  </div>
   <!-- 登陆 -->
   <div class="box mb10 hide" id="loginBox">
     <h3>登陆</h3>
@@ -14,15 +18,17 @@
     <p>密码：<input id="loginPassword" type="password"/></p>
     <input type="button" id="login" value="登陆"/>
     <input type="button" id="registerBoxShow" value="点击注册"/>
+    <p id="loginFailResponseText" class="red"></p>
   </div>
   <!-- 注册 -->
   <div class="box" id="registerBox">
     <h3>注册</h3>
     <p>用户名：<input id="registerUsername" type="text"/></p>
     <p>密码：<input id="registerPassword" type="password"/></p>
-    <p>确认：<input type="password"/></p>
+    <p>确认：<input id="repeatRegisterPassword" type="password"/></p>
     <input type="button" id="register" value="注册"/>
     <input type="button" id="loginBoxShow" value="点击登陆"/>
+    <p id="failResponseText" class="red"></p>
   </div>
   <script type="text/javasciprt" src="/public/js/jquery-2.0.3.js"></script>
   <script type="text/javascript" src="/public/js/main.js"></script>

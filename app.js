@@ -7,8 +7,10 @@
 var express = require('express');
 //【使用模版】-加载模版处理模块
 var swig = require('swig');
-
+//【数据库链接】-1
 var mongoose = require('mongoose');
+//【请求处理】-1接收来自前端post请求的数据
+var bodyParse = require('body-parser');
 
 //【应用创建】-2.创建app应用 -> NodeJS Http.createServer();
 var app = express();
@@ -24,6 +26,9 @@ app.set('view engine', 'html');
 //在开发过程中，取消模版缓存
 swig.setDefaults({cache: false});
 
+//【请求处理】-2 bodyParse设置，在路由回调函数的第一个参数 req.body 中注入前台传过来的数据对象;
+app.use(bodyParse.urlencoded({extended: true}));
+
 //【分模块发开的实现】
 /**
  * 根据三个模块进行开发
@@ -33,7 +38,7 @@ app.use('/api', require('./routers/api'));
 app.use('/', require('./routers/main')); //前台展示
 
 
-
+//【应用创建】-3.监听http请求
 //【处理请求输出】-首页，get函数的参数：req request对象，res response对象，next函数
 // app.get('/', function(req, res, next) {
 //   // res.send('<h1>欢迎访问watson的blog</h1>')
@@ -49,8 +54,8 @@ app.use('/', require('./routers/main')); //前台展示
 // })
 
 
-//【应用创建】-3.监听http请求
 
+//【数据库链接】-2
 mongoose.connect('mongodb://localhost:27018/blog', function(err) {
 
   if (err) {
