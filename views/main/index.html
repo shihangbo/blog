@@ -7,12 +7,15 @@
 </head>
 <body>
   <h1>hello welcome to watson'blog!</h1>
-  <div class="box hide" id="welcomeBox">
-    <h3 id="welcomeText" class="green">欢迎回来</h3>
+  {% if userInfo._id %}
+  <!-- 登陆成功 -->
+  <div class="box" id="welcomeBox">
+    <h3 id="welcomeText" class="green">欢迎回来{{userInfo.username}}</h3>
     <input type="button" id="quit" value="退出"/>
   </div>
+  {% else %}
   <!-- 登陆 -->
-  <div class="box mb10 hide" id="loginBox">
+  <div class="box mb10" id="loginBox">
     <h3>登陆</h3>
     <p>用户名：<input id="loginUsername" type="text"/></p>
     <p>密码：<input id="loginPassword" type="password"/></p>
@@ -21,7 +24,7 @@
     <p id="loginFailResponseText" class="red"></p>
   </div>
   <!-- 注册 -->
-  <div class="box" id="registerBox">
+  <div class="box hide" id="registerBox">
     <h3>注册</h3>
     <p>用户名：<input id="registerUsername" type="text"/></p>
     <p>密码：<input id="registerPassword" type="password"/></p>
@@ -30,7 +33,8 @@
     <input type="button" id="loginBoxShow" value="点击登陆"/>
     <p id="failResponseText" class="red"></p>
   </div>
-  <script type="text/javasciprt" src="/public/js/jquery-2.0.3.js"></script>
+  {% endif %}
+  <script type="text/javascript" src="/public/js/jquery-2.0.3.js"></script>
   <script type="text/javascript" src="/public/js/main.js"></script>
 </body>
 </html>

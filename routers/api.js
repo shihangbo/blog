@@ -80,10 +80,10 @@ router.post('/user/register', function(req, res, next) {
 
 })
 //监听路由
+//登陆
 router.post('/user/login', function(req, res, next) {
   var username = req.body.username;
   var password = req.body.password;
-  console.log(req.body);
   if (!username) {
     responseData.code = 5;
     responseData.message = '用户名不能为空';
@@ -103,18 +103,33 @@ router.post('/user/login', function(req, res, next) {
   }).then(function(userInfo) {
     if (userInfo) {
     //用户登陆成功
+      console.log(userInfo);
+      responseData.userInfo = {
+        _id: userInfo._id,
+        username: userInfo.username
+      }
+      req.cookies.set('userInfo', JSON.stringify({
+        _id: userInfo._id,
+        username: userInfo.username
+      }))
+
       responseData.message = '用户登陆成功';
-      responseData.username = username;
       res.json(responseData);
     } else {
     //没有该用户
-      responseData.message = '没有该用户信息，请重试';
+      responseData.message = '用户名或密码错误';
       responseData.code = 7;
       res.json(responseData);
     }
 
   })
 
+})
+//监听路由
+//退出
+router.get('/user/logout', function(req, res, next) {
+  req.cookies.set('userInfo', null);
+  res.json(responseData);
 })
 //对app.use()暴露路由对象
 module.exports= router;

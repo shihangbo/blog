@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
+    "mongoose": "/Users/shihangbo/Documents/download/mongodb-osx-x86_64-3.6.0/bin/mongod --dbpath=/Users/shihangbo/Documents/project/watsonBlog/db --port=27018",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

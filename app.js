@@ -11,6 +11,8 @@ var swig = require('swig');
 var mongoose = require('mongoose');
 //【请求处理】-1接收来自前端post请求的数据
 var bodyParse = require('body-parser');
+//【cookies处理】-1引入
+var Cookies = require('cookies');
 
 //【应用创建】-2.创建app应用 -> NodeJS Http.createServer();
 var app = express();
@@ -28,6 +30,20 @@ swig.setDefaults({cache: false});
 
 //【请求处理】-2 bodyParse设置，在路由回调函数的第一个参数 req.body 中注入前台传过来的数据对象;
 app.use(bodyParse.urlencoded({extended: true}));
+
+//【cookies处理】-2设置
+app.use(function(req, res, next) {
+  req.cookies = new Cookies(req, res);
+  //验证前台是否登陆
+  req.userInfo = {};
+  if (req.cookies.get('userInfo')) {
+    try {
+      req.userInfo = JSON.parse(req.cookies.get('userInfo'));
+    } catch(e){}
+  }
+
+  next();
+})
 
 //【分模块发开的实现】
 /**
@@ -153,7 +169,14 @@ mongoose.connect('mongodb://localhost:27018/blog', function(err) {
  *  2. 注册界面
  *  3. 注册逻辑：使用ajax方式实现注册，api接口编写
  *  4. 注册实现
- * 
+ *  5. 用户登陆实现
+ * 七、cooikes 实现
+ *  1. 引入依赖 cookies
+ *  2. 设置 cookies -- 通过 express 中间件，注入 req 对象中
+ *      服务器判断是否是登陆状态的原理：验证客户端的请求头部信息中的 cookies 信息
+ *  3. 解析的登陆用户的cookies信息
+ *  4. cookies信息分配到模版
+ *  5. 退出，删除 cookies 信息
  * 
  * 
  * 

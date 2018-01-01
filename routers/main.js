@@ -9,7 +9,9 @@ var router = express.Router();
 //监听路由
 router.get('/', function(req, res, next) {
   // res.send("watson");
-  res.render("main/index");
+  res.render("main/index", {
+    userInfo: req.userInfo
+  });
 })
 //对app.use()暴露router对象
 module.exports = router;
