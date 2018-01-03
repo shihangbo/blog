@@ -10,7 +10,14 @@
   {% if userInfo._id %}
   <!-- 登陆成功 -->
   <div class="box" id="welcomeBox">
+    <p>用户信息</p>
+
+    {% if userInfo.isAdmin %}
+    <h3 id="welcomeText" class="green">您好管理员，欢迎回来{{userInfo.username}}，<a href="/admin">进入管理</a></h3>
+    {% else %}
     <h3 id="welcomeText" class="green">欢迎回来{{userInfo.username}}</h3>
+    {% endif %}
+    
     <input type="button" id="quit" value="退出"/>
   </div>
   {% else %}

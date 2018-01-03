@@ -16,6 +16,10 @@ var Cookies = require('cookies');
 
 //【应用创建】-2.创建app应用 -> NodeJS Http.createServer();
 var app = express();
+
+//引入models
+var User = require('./models/users');
+
 //【静态文件托管】-2.设置静态文件托管，当用户访问以‘／public’开始，那么直接返回对应‘__dirname + '/public'’下的文件
 app.use('/public', express.static(__dirname + '/public'));
 
@@ -31,7 +35,7 @@ swig.setDefaults({cache: false});
 //【请求处理】-2 bodyParse设置，在路由回调函数的第一个参数 req.body 中注入前台传过来的数据对象;
 app.use(bodyParse.urlencoded({extended: true}));
 
-//【cookies处理】-2设置
+//【cookies处理】-2设置／【普通用户和管理员功能的实现】-2
 app.use(function(req, res, next) {
   req.cookies = new Cookies(req, res);
   //验证前台是否登陆
@@ -39,10 +43,18 @@ app.use(function(req, res, next) {
   if (req.cookies.get('userInfo')) {
     try {
       req.userInfo = JSON.parse(req.cookies.get('userInfo'));
-    } catch(e){}
+    
+      //获取当前登陆用户是否是管理员
+      User.findById(req.userInfo._id).then(function(userInfo) {
+        req.userInfo.isAdmin = Boolean(userInfo.isAdmin);
+        next();
+      })
+    
+    } catch(e){ next(); }
+  } else {
+    next();
   }
 
-  next();
 })
 
 //【分模块发开的实现】
@@ -177,7 +189,10 @@ mongoose.connect('mongodb://localhost:27018/blog', function(err) {
  *  3. 解析的登陆用户的cookies信息
  *  4. cookies信息分配到模版
  *  5. 退出，删除 cookies 信息
- * 
+ * 八、普通用户和管理员功能的实现
+ *  1. 数据结构新增字段：isAdmin //是否是管理员
+ *  2. 管理员数据需要实时验证，在入口文件进行处理
+ *  3. 模板中注入管理员逻辑
  * 
  * 
  * 
