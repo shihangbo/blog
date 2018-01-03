@@ -193,7 +193,11 @@ mongoose.connect('mongodb://localhost:27018/blog', function(err) {
  *  1. 数据结构新增字段：isAdmin //是否是管理员
  *  2. 管理员数据需要实时验证，在入口文件进行处理
  *  3. 模板中注入管理员逻辑
- * 
+ * 九、后台管理之前台首页搭建
+ *  1. 先写routers中的admin.js，身份验证
+ *  2. 路由监听处理逻辑
+ *  3. 引入bootstrap组件
+ *  4. 编辑模版／模版继承／模版重写
  * 
  * 
  * 

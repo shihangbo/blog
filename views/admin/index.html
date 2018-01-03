@@ -1,0 +1,11 @@
+
+<!-- 继承父html -->
+{% extends 'layout.html' %}
+
+<!-- 重写父html里面的占位模块 -->
+{%block main %}
+  <div class="jumbotron">
+    <h1>Hello, {{userInfo.username}}!</h1>
+    <p>欢迎进入我的博客的后台管理！</p>
+  </div>
+{%endblock%}
