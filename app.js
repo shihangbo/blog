@@ -198,6 +198,17 @@ mongoose.connect('mongodb://localhost:27018/blog', function(err) {
  *  2. 路由监听处理逻辑
  *  3. 引入bootstrap组件
  *  4. 编辑模版／模版继承／模版重写
+ * 十、用户管理之用户数据展示页面
+ *  1. 用户管理router
+ *  2. 新增用户数据展示页面user_index.html
+ *  3. 读取用户数据，渲染模版
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
  * 
  * 
  * 
