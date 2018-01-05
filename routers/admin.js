@@ -25,15 +25,33 @@ router.get('/', function(req, res, next) {
 })
 //监听路由--用户管理
 router.get('/user', function(req, res, next) {
-  
-  // 从数据库中读取用户数据
-  User.find().then(function(users) {
-    res.render('admin/user_index', {
-      userInfo: req.userInfo,
-      users: users
-    })
-  });
+  var page = Number(req.query.page || 1);
+  var limit = 2;
+  var pages = 0;
 
+  User.count().then(function(count) {
+    // 计算总页数，向上取整
+    pages = Math.ceil(count / limit);
+    // 取值不能超过pages
+    page = Math.min(page, pages);
+    // 取值不能小于 1
+    page = Math.max(page, 1);
+
+    var skip = (page - 1) * limit;
+
+    // 从数据库中读取用户数据
+    User.find().limit(limit).skip(skip).then(function(users) {
+      res.render('admin/user_index', {
+        userInfo: req.userInfo,
+        users: users,
+        page: page,
+        count: count,
+        pages: pages,
+        limit: limit,
+        page: page
+      })
+    });
+  })
   
 })
 //对app.use()暴露路由对象
