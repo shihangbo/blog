@@ -8,6 +8,7 @@ var express = require('express');
 var router = express.Router();
 
 var User = require('../models/users');
+var Category = require('../models/categories');
 
 //身份验证
 router.use(function(req, res, next) {
@@ -54,5 +55,63 @@ router.get('/user', function(req, res, next) {
   })
   
 })
+
+//分类首页前台页面
+router.get('/category', function(req, res, next) {
+  res.render('admin/category_index', {
+    userInfo: req.userInfo
+  });
+})
+
+//分类的添加前台页面
+router.get('/category/add', function(req, res, next) {
+  res.render('admin/category_add', {
+    userInfo: req.userInfo
+  })
+})
+
+//post分类的保存ajax
+router.post('/category/add', function(req, res, next) {
+
+  var name = req.body.name || '';
+  //验证name是否为空值
+  if (name === '') {
+    res.render('admin/error', {
+      userInfo: req.userInfo,
+      status: 2,// 1为成功，2为失败
+      message: '名称不能为空',
+      url: '/admin/category/add'
+    });
+    return
+  }
+  //验证数据库中是否存在name
+  Category.findOne({
+    name: name
+  }).then(function(rs) {
+    //如果存在
+    if (rs) {
+      res.render('admin/error', {
+        userInfo: req.userInfo,
+        status: 2,
+        message: '该分类已存在'
+      })
+      return Promise.reject();
+    } else {
+      //加入数据库
+      return new Category({
+        name: name
+      }).save();
+    }
+  }).then(function(newCategory) {
+    res.render('admin/error', {
+      userInfo: req.userInfo,
+      status: 1,
+      message: name + '，保存成功！',
+      url: '/admin/category'
+    })
+  })
+
+})
+
 //对app.use()暴露路由对象
 module.exports = router;

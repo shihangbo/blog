@@ -208,7 +208,12 @@ mongoose.connect('mongodb://localhost:27018/blog', function(err) {
  *  3. 前台模版处理分页
  *  4. 后台分页优化：不能 小于1，不能大于最大分页范围 User.count()，动态化分页处理
  *  5. 前台分页模块化，{%include "page.html" %}
- * 
+ * 十二、后台管理之添加博客分类功能
+ *  1. 前台新增分类首页／分类添加页／结果页（添加失败或者添加成功）
+ *  2. 新增表结构，category 用户存储分类信息，字段为name
+ *  3. 为表结构新增 schemas，新增 models
+ *  4. 在routers的 admin.js 中监听路由和新增分类的post请求，后台逻辑处理
+ *
  * 
  * 
  * 
