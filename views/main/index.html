@@ -41,6 +41,18 @@
     <p id="failResponseText" class="red"></p>
   </div>
   {% endif %}
+
+  <!-- 分类导航 -->
+  <nav>
+    <div class="menu center h50 b-white">
+      <a href="/" class="focus">首页</a>
+      {%for category in categories%}
+      <a href="/" class="focus">{{category.name}}</a>
+      {%endfor%}
+    </div>
+  </nav>
+
+
   <script type="text/javascript" src="/public/js/jquery-2.0.3.js"></script>
   <script type="text/javascript" src="/public/js/main.js"></script>
 </body>

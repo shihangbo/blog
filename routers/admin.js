@@ -77,8 +77,8 @@ router.get('/category', function(req, res, next) {
     page = Math.max(page, 1);
 
     skip = (page - 1) * limit;
-
-    Category.find().limit(limit).skip(skip).then(function(pagesInfo) {
+    // sort函数排序，1代表升序，-1代表降序
+    Category.find().sort({_id: -1}).limit(limit).skip(skip).then(function(pagesInfo) {
       res.render('admin/category_index', {
         userInfo: req.userInfo,
         pagesInfo: pagesInfo,

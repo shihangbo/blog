@@ -217,6 +217,9 @@ mongoose.connect('mongodb://localhost:27018/blog', function(err) {
  *  1. 分类列表显示
  *  2. 分类修改-坑，mongoodb的id默认为 _id
  *  3. 分类删除
+ * 十四、前台分类导航展示与排序
+ *  1. 获取所有分类信息
+ *  2. 后台界面，获取分类信息排序，sort({_id: 1或-1})
  * 
  * 
  * 

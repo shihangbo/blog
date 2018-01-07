@@ -25,3 +25,13 @@ h1 {
 .green {
   color: green;
 }
+.center {
+  text-align: center;
+}
+.h50 {
+  height: 50px;
+  line-height: 50px;
+}
+.b-white {
+  background: #fff;
+}
