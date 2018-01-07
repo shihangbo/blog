@@ -224,6 +224,7 @@ mongoose.connect('mongodb://localhost:27018/blog', function(err) {
  *  1. layout导航功能增加，增加对应后端路由
  *  2. 文章添加页的分类信息获取和渲染
  *  3. 新增文章处理-创建表结构，创建models，接口监听，逻辑处理，前台页面处理
+ *  3.1 新增文章的分类信息涉及的分类id category 字段处理，注意其在modles，schema和页面中的不同处理方式
  *  4. 文章列表显示
  *  5. 修复分页问题：将上一页和下一页绝对路径改为相对对路，仅改变hash部分
  * 
