@@ -11,6 +11,7 @@ var router = express.Router();
 
 var User = require('../models/users');
 var Category = require('../models/categories');
+var Content = require('../models/content');
 
 //身份验证
 router.use(function(req, res, next) {
@@ -253,6 +254,89 @@ router.get('/category/delete', function(req, res, next) {
   })
 })
 
+// 内容首页
+router.get('/content', function(req, res, next) {
+
+   //当前页
+   var page = Number(req.query.page || 1);
+   //每页条数
+   var limit = 10;
+   //总条数 count
+   //总页数
+   var pages = 0;
+   //分页跨度
+   var skip = 0;
+ 
+   Content.count().then(function(count) {
+     pages = Math.ceil(count / limit);
+     page = Math.min(page, pages);
+     page = Math.max(page, 1);
+ 
+     skip = (page - 1) * limit;
+     // sort函数排序，1代表升序，-1代表降序
+     Content.find().sort({_id: -1}).limit(limit).skip(skip).then(function(contents) {
+       res.render('admin/content_index', {
+         userInfo: req.userInfo,
+         contents: contents,
+         count: count,
+         pages: pages,
+         limit: limit,
+         page: page
+       });
+     })
+   })
+
+})
+// 内容添加
+router.get('/content/add', function(req, res, next) {
+
+  Category.find().sort({_id: -1}).then(function(categories) {
+    res.render('admin/content_add', {
+      userInfo: req.userInfo,
+      categories: categories
+    })
+  })
+
+})
+// 内容添加ajax提交数据库
+router.post('/content/add', function(req, res, next) {
+
+  if (!req.body.category) {
+    res.render('admin/error', {
+      userInfo: req.userInfo,
+      status: 2,
+      message: '文章分类不能为空!',
+      url: '/admin/content/add'
+    })
+    return
+  }
+
+  if (!req.body.title) {
+    res.render('admin/error', {
+      userInfo: req.userInfo,
+      status: 2,
+      message: '文章标题不能为空!',
+      url: '/admin/content/add'
+    })
+    return
+  }
+  new Content({
+    category: req.body.category,
+    title: req.body.title,
+    desc: req.body.desc,
+    content: req.body.content
+  }).save().then(function(rs) {
+    res.render('admin/error', {
+      userInfo: req.userInfo,
+      status: 1,
+      message: '文章保存成功!',
+      url: '/admin/content'
+    })
+  })
+
+})
+//
+//
 
 
 //对app.use()暴露路由对象
