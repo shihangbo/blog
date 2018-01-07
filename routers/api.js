@@ -103,7 +103,6 @@ router.post('/user/login', function(req, res, next) {
   }).then(function(userInfo) {
     if (userInfo) {
     //用户登陆成功
-      console.log(userInfo);
       responseData.userInfo = {
         _id: userInfo._id,
         username: userInfo.username

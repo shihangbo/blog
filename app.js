@@ -213,8 +213,10 @@ mongoose.connect('mongodb://localhost:27018/blog', function(err) {
  *  2. 新增表结构，category 用户存储分类信息，字段为name
  *  3. 为表结构新增 schemas，新增 models
  *  4. 在routers的 admin.js 中监听路由和新增分类的post请求，后台逻辑处理
- *
- * 
+ *十三、后台管理之博客分类的修改和删除
+ *  1. 分类列表显示
+ *  2. 分类修改-坑，mongoodb的id默认为 _id
+ *  3. 分类删除
  * 
  * 
  * 
