@@ -12,7 +12,7 @@ module.exports = new mongoose.Schema({
     //类型
     type: mongoose.Schema.Types.ObjectId,
     //引用
-    ref: 'Content'
+    ref: 'Category'
   },
   //标题
   title: String,

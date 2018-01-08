@@ -274,8 +274,8 @@ router.get('/content', function(req, res, next) {
  
      skip = (page - 1) * limit;
      // sort函数排序，1代表升序，-1代表降序
-     Content.find().sort({_id: -1}).limit(limit).skip(skip).then(function(contents) {
-       res.render('admin/content_index', {
+     Content.find().sort({_id: -1}).limit(limit).skip(skip).populate('category').then(function(contents) {
+      res.render('admin/content_index', {
          userInfo: req.userInfo,
          contents: contents,
          count: count,
@@ -335,8 +335,101 @@ router.post('/content/add', function(req, res, next) {
   })
 
 })
-//
-//
+
+//文章修改页面获取
+router.get('/content/edit', function(req, res, next) {
+  
+  var id = req.query.id || '';
+
+  if (!id) {
+    res.render('admin/error', {
+      userInfo: req.userInfo,
+      status: 2,
+      message: '没有对应的文章信息',
+      url: '/admin/content'
+    })
+  }
+
+  Category.find().sort({_id: -1}).then(function(categories) {
+    Content.findOne({
+      _id: id
+    }).then(function(content) {
+      if (!content) {
+        res.render('admin/error', {
+          userInfo: req.userInfo,
+          status: 2,
+          message: '没有对应的文章信息',
+          url: '/admin/content'
+        })
+      } else {
+        res.render('admin/content_edit', {
+          userInfo: req.userInfo,
+          content: content,
+          categories: categories
+        })
+      }
+    })
+  })
+
+})
+
+//文章修改接口处理
+router.post('/content/edit', function(req, res, next) {
+  var id = req.query.id || '';
+  if (!req.body.category) {
+    res.render('admin/error', {
+      userInfo: req.userInfo,
+      status: 2,
+      message: '文章分类不能为空!',
+      url: '/admin/content/add'
+    })
+    return
+  }
+
+  if (!req.body.title) {
+    res.render('admin/error', {
+      userInfo: req.userInfo,
+      status: 2,
+      message: '文章标题不能为空!',
+      url: '/admin/content/add'
+    })
+    return
+  }
+
+  Content.update({
+    _id: id
+  }, {
+    category: req.body.category,
+    title: req.body.title,
+    desc: req.body.desc,
+    content: req.body.content
+  }).then(function() {
+    res.render('admin/error', {
+      userInfo: req.userInfo,
+      status: 1,
+      message: '修改成功！',
+      url: '/admin/content'
+    })
+  })
+
+})
+
+//文章删除接口处理
+router.get('/content/delete', function(req, res, next) {
+  var id = req.query.id || '';
+
+  Content.remove({
+    _id: id
+  }).then(function() {
+    res.render('admin/error', {
+      userInfo: req.userInfo,
+      status: 1,
+      message: '删除成功！',
+      url: '/admin/content'
+    })
+  })
+
+})
 
 
 //对app.use()暴露路由对象
