@@ -274,7 +274,7 @@ router.get('/content', function(req, res, next) {
  
      skip = (page - 1) * limit;
      // sort函数排序，1代表升序，-1代表降序
-     Content.find().sort({_id: -1}).limit(limit).skip(skip).populate('category').then(function(contents) {
+     Content.find().sort({_id: -1}).limit(limit).skip(skip).populate(['category', 'user']).then(function(contents) {
       res.render('admin/content_index', {
          userInfo: req.userInfo,
          contents: contents,
@@ -324,7 +324,8 @@ router.post('/content/add', function(req, res, next) {
     category: req.body.category,
     title: req.body.title,
     desc: req.body.desc,
-    content: req.body.content
+    content: req.body.content,
+    user: req.userInfo._id.toString()
   }).save().then(function(rs) {
     res.render('admin/error', {
       userInfo: req.userInfo,
