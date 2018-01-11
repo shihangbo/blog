@@ -16,6 +16,15 @@ h1 {
 .mb10 {
   margin-bottom: 10px;
 }
+.mb50 {
+  margin-bottom: 50px;
+}
+.mb80 {
+  margin-bottom: 80px;
+}
+.mt30 {
+  margin-top: 30px;
+}
 .hide {
   display: none;
 }
@@ -34,4 +43,11 @@ h1 {
 }
 .b-white {
   background: #fff;
+}
+.webkit-middle {
+  vertical-align: -webkit-baseline-middle;
+  vertical-align: baseline-middle;
+}
+.bg-c {
+  background: #ccc !important;
 }

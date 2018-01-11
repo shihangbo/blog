@@ -97,7 +97,6 @@ mongoose.connect('mongodb://localhost:27018/blog', function(err) {
 })
 
 
-
 /**
  * 用户通过url访问web应用，如何 http://localhost:8081/
  * web后端根据用户访问的url处理不同的业务逻辑
@@ -236,7 +235,21 @@ mongoose.connect('mongodb://localhost:27018/blog', function(err) {
  *  1. 在文章表结构中，添加字段：关联字段 - 用户id，时间addTime，阅读量views
  *  2. 在添加文章中新增字段，user代表用户id，使用populate()函数，增加对应用户信息的获取，集中渲染文章列表页面
  *  3. 时间显示，放进去用 new Date()，页面显示需要转化，使用模版引擎swig提供的过滤器 {{content.addTime|date('Y/m/d H:i:s', -8*60)}}，“-8*60”代表东八区区时转换
+ * 十八、前台分页展示
+ *  1. 前台首页main.js获取文章内容
+ *  2. 渲染模版，bug：文章的 user 属性没有获取到，时间bug
+ *  3. 分页处理
  *  4. 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
  * 
  * 
  * 
