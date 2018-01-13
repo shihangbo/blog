@@ -60,9 +60,18 @@
   <!-- 分类导航 -->
   <nav>
     <ul class="nav nav-pills center">
-      <li role="presentation" href="/"><a href="/">首页</a></li>
-      {%for category in categories%}
-      <li role="presentation"><a href="/">{{category.name}}</a></li>
+      {%if category == '' %}
+      <li role="presentation" class="active"><a href="/">首页</a></li>
+      {%else%}
+      <li role="presentation"><a href="/">首页</a></li>
+      {%endif%}
+
+      {%for c in categories%}
+        {%if category == c.id %}
+        <li role="presentation" class="active"><a href="/?category={{c.id}}">{{c.name}}</a></li>
+        {%else%}
+        <li role="presentation"><a href="/?category={{c.id}}">{{c.name}}</a></li>
+        {%endif%}
       {%endfor%}
     </ul>
   </nav>
@@ -94,7 +103,7 @@
         {%if page <= 1%}
         <li class="previous"><span class="bg-c">没有上一页了</span></li>
         {%else%}
-        <li class="previous"><a href="?page={{page-1}}"><span aria-hidden="true">&larr;</span> previous</a></li>
+        <li class="previous"><a href="?category={{category}}&page={{page-1}}"><span aria-hidden="true">&larr;</span> previous</a></li>
         {%endif%}
         
         <li class="webkit-middle">
@@ -104,7 +113,7 @@
         {%if page >= pages%}
         <li class="next"><span class="bg-c">没有下一页了</span></li>
         {%else%}
-        <li class="next"><a href="?page={{page+1}}">next <span aria-hidden="true">&rarr;</span></a></li>
+        <li class="next"><a href="?category={{category}}&page={{page+1}}">next <span aria-hidden="true">&rarr;</span></a></li>
         {%endif%}
       </ul>
     </nav>

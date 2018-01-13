@@ -14,6 +14,7 @@ var Content = require('../models/content');
 router.get('/', function(req, res, next) {
 
   var data = {};
+  data.category = req.query.category || '' //分类id
   data.page = Number(req.query.page || 1) //当前页
   data.limit = 2 //每页条数
   data.pages = 0 //总页数
@@ -22,13 +23,17 @@ router.get('/', function(req, res, next) {
   data.categories = [] //当前用户分类列表
   data.contents = [] //当前用户的文章列表
 
+  var where = {} //文章查询条件
+  if (data.category) {
+    where.category = data.category
+  }
 
   //读取所有分类信息
   Category.find().then(function(categories) {
     // res.send("watson");
     data.categories = categories;
 
-    return Content.count();
+    return Content.where(where).count();
 
   }).then(function(count) {
 
@@ -38,13 +43,13 @@ router.get('/', function(req, res, next) {
     data.page = Math.max(data.page, 1);
     var skip = (data.page - 1) * data.limit; //从 skip 开始查
 
-    return Content.find().limit(data.limit).skip(skip).populate(['category', 'user']).sort({
+    return Content.where(where).find().limit(data.limit).skip(skip).populate(['category', 'user']).sort({
       addTime: -1
     });
 
   }).then(function(contents) {
     data.contents = contents;
-    console.log(data)
+    // console.log(data)
     res.render("main/index", data);
   })
   

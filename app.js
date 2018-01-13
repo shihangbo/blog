@@ -239,7 +239,11 @@ mongoose.connect('mongodb://localhost:27018/blog', function(err) {
  *  1. 前台首页main.js获取文章内容
  *  2. 渲染模版，bug：文章的 user 属性没有获取到，时间bug
  *  3. 分页处理
- *  4. 
+ * 十九、前台内容分类展示
+ *  1. 前后台处理分类列表，前台路由添加每个分类的categoryId，后台查询文章列表增加查询条件 .where(where)
+ *  2. 处理分页显示的bug，总条数也需要根据每个分类进行查询---模版添加判断
+ *  3. 处理点击上一页下一页的bug，点击上一页需要在当前categoryid下进行查询---模版url处理，加上categoryid参数即可
+ *  4. 处理分类点击高亮的问题，模版处理判断点击的categoryid 是否等于 当前分类的categoryid 即可（也可以js来处理）
  * 
  * 
  * 
