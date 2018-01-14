@@ -244,7 +244,12 @@ mongoose.connect('mongodb://localhost:27018/blog', function(err) {
  *  2. 处理分页显示的bug，总条数也需要根据每个分类进行查询---模版添加判断
  *  3. 处理点击上一页下一页的bug，点击上一页需要在当前categoryid下进行查询---模版url处理，加上categoryid参数即可
  *  4. 处理分类点击高亮的问题，模版处理判断点击的categoryid 是否等于 当前分类的categoryid 即可（也可以js来处理）
- * 
+ * 二十、内容详情展示和阅读数处理
+ *  1. 内容详情页展示，第一步模版中处理首页详情跳转url，第二步 监听跳转路由
+ *  2. 使用中间件方式处理“通用数据”
+ *  3. main下面的模版处理：提取公共模版layout.html，处理index.html，新建view.html模版承载文章详情数据页面
+ *  4. 处理阅读数
+ *  5. 
  * 
  * 
  * 

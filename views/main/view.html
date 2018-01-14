@@ -1,0 +1,22 @@
+{%extends 'layout.html'%} {%block contents%}
+<div class="container mt30">
+  <!-- Main component for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <h1>{{content.title}}</h1>
+    <p>
+      作者：
+      <span class="colInfo">{{content.user.username}}</span>
+      时间：
+      <span class="colInfo">{{content.addTime|date('Y-m-d H:i:s', -8*60)}}</span>
+      阅读：
+      <span class="colInfo">{{content.views}}</span>
+      评论：
+      <span class="colInfo">10</span>
+    </p>
+    <dfn>
+      <p>{{content.desc}}</p>
+    </dfn>
+
+  </div>
+</div>
+{%endblock%}

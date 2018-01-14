@@ -67,6 +67,7 @@ $(function() {
   })
 
 
+
   //封装原生ajax
   function request(type, url, data) {
     return new Promise(function(resolve, reject) {
