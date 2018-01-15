@@ -249,6 +249,11 @@ mongoose.connect('mongodb://localhost:27018/blog', function(err) {
  *  2. 使用中间件方式处理“通用数据”
  *  3. main下面的模版处理：提取公共模版layout.html，处理index.html，新建view.html模版承载文章详情数据页面
  *  4. 处理阅读数
+ * 二十一、内容评论实现
+ *  1. 评论模版处理，html搭建，api路由监听
+ *  2. 将每篇文章的评论保存在对应字段中，在数据库中添加对应字段，保存数据为评论人，评论内容，评论时间
+ *  3. 前台处理ajax请求与后续操作，使用jq提交post请求，加入隐藏域input来保存文章id
+ *  4. 
  *  5. 
  * 
  * 
