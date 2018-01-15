@@ -40,6 +40,11 @@ module.exports = new mongoose.Schema({
   content: {
     type: String,
     default: ''
+  },
+  //评论字段
+  comments: {
+    type: Array,
+    default: []
   }
 
 })

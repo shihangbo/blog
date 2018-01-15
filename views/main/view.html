@@ -1,6 +1,7 @@
 {%extends 'layout.html'%} {%block contents%}
+
+<!-- 文章内容区 -->
 <div class="container mt30">
-  <!-- Main component for a primary marketing message or call to action -->
   <div class="jumbotron">
     <h1>{{content.title}}</h1>
     <p>
@@ -16,7 +17,37 @@
     <dfn>
       <p>{{content.desc}}</p>
     </dfn>
-
   </div>
 </div>
+
+<!-- 评论区 -->
+<div class="container mt30">
+  <div class="listBox message jumbotron">
+    <h3 class="textLeft">
+      <strong>评论</strong>
+      <span class="em">一共有
+        <em class="messageCount">0</em>条评论</span>
+    </h3>
+
+    {%if userInfo._id%}
+    <p class="textLeft">zmouse</p>
+    <p class="textLeft clear" style="overflow: hidden;">
+      <textarea name="" id="messageContent"  rows="3" style="vertical-align: bottom;width: 85%;float: left;"></textarea>
+      <input class="hidden" type="hidden" id="contentId" value={{content.id}}>
+      <button id="messageBtn" class="submit" style="width: 15%;float:right;height: 96px;">提交</button>
+    </p>
+    {%else%}
+    <p class="bgDanger" style="line-height: 30px;">
+      你还没有登陆，请先登陆！
+    </p>
+    {%endif%}
+
+    <div class="messageList">
+      <div class="messageBox">
+        <p>还没有留言</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="/public/js/comment.js"></script>
 {%endblock%}

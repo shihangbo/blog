@@ -8,6 +8,7 @@ var express = require('express');
 var router = express.Router();
 //引入数据库models
 var User = require('../models/users');
+var Content = require('../models/content');
 
 
 // 统一返回格式，并进行初始化
@@ -130,5 +131,35 @@ router.get('/user/logout', function(req, res, next) {
   req.cookies.set('userInfo', null);
   res.json(responseData);
 })
+
+//评论提交
+router.post('/comment/post', function(req, res, next) {
+  //内容的id
+  var contentId = req.body.contentId || '';
+  //评论内容
+  var postData = {
+    username: req.userInfo.username,
+    postTime: new Date(),
+    content: req.body.content
+  }
+  //查询当前文章信息
+  Content.findOne({
+    _id: contentId
+  }).then(function(content) {
+    content.comments.push(postData);
+    console.log(content)
+    content.save();
+    responseData.message = '评论成功！'
+    res.json(responseData);
+
+  }).then(function(newUserInfo) {
+    console.log(3)
+    responseData.message = '评论成功！'
+    res.json(responseData);
+  });
+
+})
+
+
 //对app.use()暴露路由对象
 module.exports= router;
