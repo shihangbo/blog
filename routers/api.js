@@ -146,19 +146,20 @@ router.post('/comment/post', function(req, res, next) {
   Content.findOne({
     _id: contentId
   }).then(function(content) {
-    content.comments.push(postData);
-    console.log(content)
-    content.save();
-    responseData.message = '评论成功！'
-    res.json(responseData);
+    //数组的push方法填坑！！
+    var tmpArr = []
+    tmpArr.push(postData);
+    tmpArr = tmpArr.concat(content.comments);
 
+    content.comments = tmpArr;
+    content.save();
   }).then(function(newUserInfo) {
-    console.log(3)
     responseData.message = '评论成功！'
     res.json(responseData);
   });
 
 })
+
 
 
 //对app.use()暴露路由对象

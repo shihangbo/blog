@@ -36,17 +36,19 @@
       <input class="hidden" type="hidden" id="contentId" value={{content.id}}>
       <button id="messageBtn" class="submit" style="width: 15%;float:right;height: 96px;">提交</button>
     </p>
+    
+    <!-- 显示过往的留言 -->
+    <div class="messageList">
+      <div class="messageBox">
+        <p>还没有留言</p>
+      </div>
+    </div>
     {%else%}
     <p class="bgDanger" style="line-height: 30px;">
       你还没有登陆，请先登陆！
     </p>
     {%endif%}
 
-    <div class="messageList">
-      <div class="messageBox">
-        <p>还没有留言</p>
-      </div>
-    </div>
   </div>
 </div>
 <script type="text/javascript" src="/public/js/comment.js"></script>
