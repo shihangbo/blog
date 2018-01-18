@@ -160,7 +160,5 @@ router.post('/comment/post', function(req, res, next) {
 
 })
 
-
-
 //对app.use()暴露路由对象
 module.exports= router;

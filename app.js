@@ -256,25 +256,4 @@ mongoose.connect('mongodb://localhost:27018/blog', function(err) {
  *  4. 评论字段comments（数组对象）无法正常被push的坑：comments.push()执行之后不能被save()到数据库，
  *     解决方案：拼凑成一个数组，在复制给 comment 进行 save()，具体代码：var tmpArr = [];tmpArr.push(postData);tmpArr = tmpArr.concat(content.comments);
  *     注释：在nodejs中使用数组api要特别注意，如[].concat()之后，需要返回操作后的数据才是有效的，否则无效！
- *  5. 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
  */
