@@ -1,4 +1,3 @@
-
 /**
  * Created by watson on 2017/12/25
 */
@@ -54,7 +53,6 @@ app.use(function(req, res, next) {
   } else {
     next();
   }
-
 })
 
 //【分模块发开的实现】
@@ -81,21 +79,15 @@ app.use('/', require('./routers/main')); //前台展示
 //   res.send('body {background: #ddd;}');
 // })
 
-
-
 //【数据库链接】-2
 mongoose.connect('mongodb://localhost:27018/blog', function(err) {
-
   if (err) {
     console.log('数据库连接失败！' + err);
   } else {
     console.log('数据库链接成功，开始代码吧～');
     app.listen(8081);
   }
-
-
 })
-
 
 /**
  * 用户通过url访问web应用，如何 http://localhost:8081/
