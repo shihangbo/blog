@@ -1,5 +1,3 @@
-
-
 /**
  * Created by watson on 2017/12/26
 */
@@ -56,7 +54,6 @@ router.get('/user', function(req, res, next) {
       })
     });
   })
-  
 })
 
 //分类首页前台页面
@@ -76,7 +73,6 @@ router.get('/category', function(req, res, next) {
     pages = Math.ceil(count / limit);
     page = Math.min(page, pages);
     page = Math.max(page, 1);
-
     skip = (page - 1) * limit;
     // sort函数排序，1代表升序，-1代表降序
     Category.find().sort({_id: -1}).limit(limit).skip(skip).then(function(pagesInfo) {
@@ -90,8 +86,6 @@ router.get('/category', function(req, res, next) {
       });
     })
   })
-
-
 })
 
 //分类的添加前台页面
@@ -103,7 +97,6 @@ router.get('/category/add', function(req, res, next) {
 
 //post分类的保存ajax
 router.post('/category/add', function(req, res, next) {
-
   var name = req.body.name || '';
   //验证name是否为空值
   if (name === '') {
@@ -141,7 +134,6 @@ router.post('/category/add', function(req, res, next) {
       url: '/admin/category'
     })
   })
-
 })
 
 //分类修改页面/admin/category/edit
@@ -237,11 +229,9 @@ router.post('/category/edit', function(req, res, next) {
 
 })
 
-
 //分类删除/admin/category/delete
 router.get('/category/delete', function(req, res, next) {
   var id = req.query.id || '';
-
   Category.remove({
     _id: id
   }).then(function() {
@@ -256,7 +246,6 @@ router.get('/category/delete', function(req, res, next) {
 
 // 内容首页
 router.get('/content', function(req, res, next) {
-
    //当前页
    var page = Number(req.query.page || 1);
    //每页条数
@@ -266,12 +255,10 @@ router.get('/content', function(req, res, next) {
    var pages = 0;
    //分页跨度
    var skip = 0;
- 
    Content.count().then(function(count) {
      pages = Math.ceil(count / limit);
      page = Math.min(page, pages);
      page = Math.max(page, 1);
- 
      skip = (page - 1) * limit;
      // sort函数排序，1代表升序，-1代表降序
      Content.find().sort({_id: -1}).limit(limit).skip(skip).populate(['category', 'user']).sort({
@@ -287,22 +274,18 @@ router.get('/content', function(req, res, next) {
        });
      })
    })
-
 })
 // 内容添加
 router.get('/content/add', function(req, res, next) {
-
   Category.find().sort({_id: -1}).then(function(categories) {
     res.render('admin/content_add', {
       userInfo: req.userInfo,
       categories: categories
     })
   })
-
 })
 // 内容添加ajax提交数据库
 router.post('/content/add', function(req, res, next) {
-
   if (!req.body.category) {
     res.render('admin/error', {
       userInfo: req.userInfo,
@@ -336,14 +319,11 @@ router.post('/content/add', function(req, res, next) {
       url: '/admin/content'
     })
   })
-
 })
 
 //文章修改页面获取
 router.get('/content/edit', function(req, res, next) {
-  
   var id = req.query.id || '';
-
   if (!id) {
     res.render('admin/error', {
       userInfo: req.userInfo,
@@ -373,7 +353,6 @@ router.get('/content/edit', function(req, res, next) {
       }
     })
   })
-
 })
 
 //文章修改接口处理
@@ -414,13 +393,11 @@ router.post('/content/edit', function(req, res, next) {
       url: '/admin/content'
     })
   })
-
 })
 
 //文章删除接口处理
 router.get('/content/delete', function(req, res, next) {
   var id = req.query.id || '';
-
   Content.remove({
     _id: id
   }).then(function() {
@@ -431,9 +408,7 @@ router.get('/content/delete', function(req, res, next) {
       url: '/admin/content'
     })
   })
-
 })
-
 
 //对app.use()暴露路由对象
 module.exports = router;

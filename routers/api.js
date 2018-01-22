@@ -10,7 +10,6 @@ var router = express.Router();
 var User = require('../models/users');
 var Content = require('../models/content');
 
-
 // 统一返回格式，并进行初始化
 var responseData;
 router.use(function(req, res, next) {
@@ -18,7 +17,6 @@ router.use(function(req, res, next) {
     code: 0,
     message: ''
   }
-
   next();
 });
 
@@ -121,9 +119,7 @@ router.post('/user/login', function(req, res, next) {
       responseData.code = 7;
       res.json(responseData);
     }
-
   })
-
 })
 //监听路由
 //退出
