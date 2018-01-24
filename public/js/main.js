@@ -28,7 +28,6 @@ $(function() {
 
   //注册请求
   $('#register').on('click', function() {
-
     var data = 'username=' + $('#registerUsername').val() + '&password=' + $('#registerPassword').val() +'&repassword=' + $('#repeatRegisterPassword').val()
     request('POST', '/api/user/register', data).then(function(res) {
       setTimeout(function() {
@@ -41,32 +40,24 @@ $(function() {
       $('#repeatRegisterPassword').val('');
     }).catch(function(res) {
       $('#failResponseText').html(res.message);
-
       //清空信息
       $('#registerUsername').val('');
       $('#registerPassword').val('');
       $('#repeatRegisterPassword').val('');
     })
-
   })
 
   //登陆请求
   $('#login').on('click', function() {
-
     var data = 'username=' + $('#loginUsername').val() + '&password=' + $('#loginPassword').val();
     request('POST', '/api/user/login', data).then(function(res) {
-
       window.location.reload();
-
     }).catch(function(res) {
       $('#loginFailResponseText').html(res.message);
       //清空数据
       $('#loginPassword').val('');
     })
-
   })
-
-
 
   //封装原生ajax
   function request(type, url, data) {
@@ -89,7 +80,6 @@ $(function() {
   
         }
       }
-  
       if (type === 'GET') {
         xhr.open(type, url + '?' + data, true);
         xhr.send(null);
@@ -98,7 +88,6 @@ $(function() {
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.send(data);
       }
-
     })
   }
 })
@@ -152,7 +141,6 @@ $(function() {
 //     // if (!registerPassword) return alert('请输入注册密码');
 //     var repeatRegisterPassword = document.getElementById('repeatRegisterPassword').value;
 //     // if (!repeatRegisterPassword) return alter('请重复输入注册密码');
-
 //     var data = 'username=' + registerUsername + '&password=' + registerPassword +'&repassword=' + repeatRegisterPassword
 //     request('POST', '/api/user/register', data).then(function(res) {
 //       setTimeout(function() {
@@ -170,7 +158,6 @@ $(function() {
 //       document.getElementById('registerPassword').value = '';
 //       document.getElementById('repeatRegisterPassword').value = '';
 //     })
-
 //   }, false)
 
 //   //登陆请求
@@ -194,7 +181,6 @@ $(function() {
 //     })
 
 //   }, false)
-
 
 //   //封装原生ajax
 //   function request(type, url, data) {
@@ -226,8 +212,6 @@ $(function() {
 //         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 //         xhr.send(data);
 //       }
-
 //     })
 //   }
-
 // })()
