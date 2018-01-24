@@ -6,7 +6,6 @@
 var mongoose = require("mongoose");
 //创建用户表结构
 module.exports = new mongoose.Schema({
-
   //用户名
   username: String,
   //密码
@@ -16,5 +15,4 @@ module.exports = new mongoose.Schema({
     type: Boolean,
     default: false
   }
-
 })

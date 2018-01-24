@@ -6,7 +6,6 @@
 var mongoose = require("mongoose");
 //创建内容表结构
 module.exports = new mongoose.Schema({
-
   //关联字段 - 内容分类id
   category: {
     //类型
@@ -46,5 +45,4 @@ module.exports = new mongoose.Schema({
     type: Array,
     default: []
   }
-
 })
