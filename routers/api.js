@@ -148,9 +148,10 @@ router.post('/comment/post', function(req, res, next) {
     tmpArr = tmpArr.concat(content.comments);
 
     content.comments = tmpArr;
-    content.save();
+    return content.save();
   }).then(function(newUserInfo) {
-    responseData.message = '评论成功！'
+    responseData.message = '评论成功！';
+    responseData.data = newUserInfo;
     res.json(responseData);
   });
 
