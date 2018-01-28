@@ -241,11 +241,17 @@ mongoose.connect('mongodb://localhost:27018/blog', function(err) {
  *  2. 使用中间件方式处理“通用数据”
  *  3. main下面的模版处理：提取公共模版layout.html，处理index.html，新建view.html模版承载文章详情数据页面
  *  4. 处理阅读数
- * 二十一、内容评论实现
+ * 二十一、内容评论实现-上部分
  *  1. 评论模版处理，html搭建，api路由监听
  *  2. 将每篇文章的评论保存在对应字段中，在数据库中添加对应字段，保存数据为评论人，评论内容，评论时间
  *  3. 前台处理ajax请求与后续操作，使用jq提交post请求，加入隐藏域input来保存文章id
  *  4. 评论字段comments（数组对象）无法正常被push的坑：comments.push()执行之后不能被save()到数据库，
  *     解决方案：拼凑成一个数组，在复制给 comment 进行 save()，具体代码：var tmpArr = [];tmpArr.push(postData);tmpArr = tmpArr.concat(content.comments);
  *     注释：在nodejs中使用数组api要特别注意，如[].concat()之后，需要返回操作后的数据才是有效的，否则无效！
+ * 二十二、内容评论实现-下部分
+ *  1. 每次进入页面，请求评论
+ *  2. 评论数
+ *  3. 评论时间处理
+ *  4. 评论分页 -- 前端分页
+ * 
  */

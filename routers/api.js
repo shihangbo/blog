@@ -157,5 +157,17 @@ router.post('/comment/post', function(req, res, next) {
 
 })
 
+//获取指定文章的所有评论
+router.get('/comment', function(req, res, next) {
+  var contentId = req.query.contentId || ""
+  //查询当前文章信息
+  Content.findOne({
+    _id: contentId
+  }).then(function(content) {
+    responseData.data = content.comments
+    res.json(responseData)
+  })
+})
+
 //对app.use()暴露路由对象
 module.exports= router;
