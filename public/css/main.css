@@ -2,6 +2,8 @@
  * Created by watson on 2017/12/26
 */
 
+@import "csskit-less.css";
+
 body {
   background: #ddd;
 }
