@@ -69,6 +69,7 @@ app.use('/', require('./routers/main')); //前台展示
 // app.get('/', function(req, res, next) {
 //   // res.send('<h1>欢迎访问watson的blog</h1>')
 
+
 //   //【使用模版】（使用模版之后，这么来做）读取views目录下的指定文件，解析并返回给客户端，第一个参数是模版文件，第二个参数是传递给模版使用的数据；
 //   res.render('index');
 // })
