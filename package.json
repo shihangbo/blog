@@ -1,16 +1,16 @@
 {
-  "name": "watson_blog",
+  "name": "blog",
   "version": "1.0.0",
-  "description": "watson's blog",
+  "description": "blog",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "mongodb": "/Users/shihangbo/Documents/download/mongodb-osx-x86_64-3.6.0/bin/mongod --dbpath=/Users/shihangbo/Documents/project/watsonBlog/db --port=27018",
+    "mongodb": "/Users/shihangbo/Documents/download/mongodb-osx-x86_64-3.6.0/bin/mongod --dbpath=/Users/shihangbo/Documents/project/blog/db --port=27018",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shihangbo/watson-blog.git"
+    "url": "git+https://github.com/shihangbo/blog.git"
   },
   "keywords": [
     "blog"
@@ -18,9 +18,9 @@
   "author": "watson",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/shihangbo/watson-blog/issues"
+    "url": "https://github.com/shihangbo/blog/issues"
   },
-  "homepage": "https://github.com/shihangbo/watson-blog#readme",
+  "homepage": "https://github.com/shihangbo/blog#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "cookies": "^0.7.1",
